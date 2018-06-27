@@ -1,2 +1,30 @@
-<!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<image class='logo' src='/images/ln_logo_long.png'></image>
+<view wx:if='{{list.assignmentDetailForTaskListList.length>0}}'>
+  <view class='jcdInfo'>
+    <!-- <view class='jcdId'>{{list.jcdId}}</view> -->
+    <view class='frmaeCode'>车架号：{{list.frameCode}}</view>
+  </view>
+  <view class='assignment-list' wx:for='{{list.assignmentDetailForTaskListList}}' wx:key='id'>
+    <view class='assignment-card'>
+      <view class='assignment-info'>
+        <view class='gyz'>{{item.gyzName.name}}组:</view>
+        <view class='gzxm'>{{item.gzxmName.name}}</view>
+        <view class='expectTime'>预计时间：{{item.expectCompletionTime}}</view>   
+      </view>
+      <view class='status'>
+        <progress class='progressStatus' percent='{{item.status*33.3}}' stroke-width='20' activeColor='green'   backgroundColor='#936c6c' active='true'></progress>  
+        <view class='textStatus'>{{item.statusText}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='null-card' wx:if='{{list.assignmentDetailForTaskListList== null}}'>
+  <image class='null-image' src='/images/null.jpg'></image>
+  <view class='null-text'>
+    <view>暂无记录</view>
+    <view>请联系工作人员</view>
+  </view>
+</view>
+
+

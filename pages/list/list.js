@@ -1,66 +1,54 @@
-// pages/list/list.js
+const util = require('../../utils/util.js')
+const statusMap={
+  '0':'未派工',
+  '1':'已派工',
+  '2': '已开工',
+  '3': '完工',
+}
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
-  
+    list:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    let frameCode = options.frameCode
+    console.log(frameCode)
+    this.getList(frameCode)
+    },
+  getList(frameCode){
+    wx.request({
+      url: 'http://localhost:8080/tasklist/frameCode/' + frameCode,
+      success:res=>{
+          let list = {}
+          let assignmentDetail = []
+          if(res.data.jcdId= null){
+            list.jcdId = res.data.jcdId
+            list.frameCode = res.data.frameCode
+            assignmentDetail = res.data.assignmentDetailForTaskListList.map(item => {
+              let itemDate = new Date(item.expectCompletionTime)
+              item.expectCompletionTime = util.formatTime(itemDate).substring(0, 10)
+              item.statusText = statusMap[item.status]
+              return item
+            })
+            list.assignmentDetailForTaskListList = assignmentDetail
+            this.setData({
+              list: list
+            })
+          }
+          console.log(list)
+      },
+      fail:err=>{
+        console.log(err)
+        wx.showLoading({
+          icon:'none',
+          title: '加载失败，请重试',
+        })
+      }
+    })
   }
 })

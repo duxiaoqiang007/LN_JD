@@ -1,1 +1,92 @@
-/* pages/list/list.wxss */
+.logo{
+  margin: 20rpx;
+  height: 100rpx;
+  width: 710rpx;
+}
+.jcdInfo{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.8
+}
+.assignment-list{
+  margin: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+.assignment-card{
+  position: relative;
+  width: 690rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF; 
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+  border-radius: 20rpx;
+}
+.assignment-info{
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.9;
+}
+.gyz{
+  margin-left: 10rpx;
+}
+.gzxm{
+  flex: 1;
+  margin-left: 10rpx;
+}
+.expectTime{
+  text-align: right;
+  margin-right: 10rpx
+}
+.status{
+  display: flex;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 30rpx;
+}
+.progressStatus{
+  flex: 1
+}
+.textStatus{
+  align-items: flex-end;
+  margin-left: 30rpx;
+  font-size: 34rpx;
+  line-height: 49rpx;
+  opacity: 0.9;
+}
+.null-card{
+  position: relative;
+  margin:32rpx 52rpx 0;
+  height: 360rpx;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0,0,0,0.2);
+  border-radius: 13rpx;
+}
+.null-image{
+  position: absolute;
+  top: 10rpx;
+  left: 240rpx;
+  height: 200rpx;
+  width: 200rpx;
+  opacity: 0.4;
+}
+.null-text{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.4;
+  font-weight: bold;
+  position: absolute;
+  top:250rpx;
+  width: 646rpx;
+  text-align: center;
+}

@@ -1,2 +1,13 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<!-- <image src='/images/bg.jpg' class='bg'></image> -->
+<image class='logo' src='/images/ln_logo_long.png'></image>
+<swiper class='swiper' indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<input class='inputText' bindinput='onInput' maxlength='17' placeholder='请输入车架号'>{{frameCode}}</input>
+<view wx:if='{{frameCode.length>0}}' class='searchBtn' bindtap='onTapSearch'>查询</view>
