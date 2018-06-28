@@ -44,6 +44,7 @@ Page({
   },
   onTapSearch(event){
     let frameCode = this.data.frameCode
+    if (frameCode.length<4)  return
     wx.setStorage({
       key: 'key',
       data: frameCode ,

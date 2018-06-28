@@ -9,6 +9,7 @@ Page({
 
 
   data: {
+    frameCode:'',
     list:{}
   },
 
@@ -17,30 +18,42 @@ Page({
    */
   onLoad: function (options) {
     let frameCode = options.frameCode
+    this.setData({
+      frameCode
+    })
     console.log(frameCode)
-    this.getList(frameCode)
+    this.getList()
     },
-  getList(frameCode){
+  onPullDownfresh:function(){
+    this.getList(()=>{
+      wx.stopPullDownRefresh()
+    })
+  },
+  getList(callback){
+    wx.showLoading({
+      title: '加载中，请稍后',
+    })
     wx.request({
-      url: 'http://localhost:8080/tasklist/frameCode/' + frameCode,
+      url: 'http://218.69.129.122:8080/ln-mes-server-0.1.0/tasklist/frameCode/' + this.data.frameCode,
       success:res=>{
-          let list = {}
-          let assignmentDetail = []
-          if(res.data.jcdId= null){
-            list.jcdId = res.data.jcdId
-            list.frameCode = res.data.frameCode
-            assignmentDetail = res.data.assignmentDetailForTaskListList.map(item => {
-              let itemDate = new Date(item.expectCompletionTime)
-              item.expectCompletionTime = util.formatTime(itemDate).substring(0, 10)
-              item.statusText = statusMap[item.status]
-              return item
-            })
-            list.assignmentDetailForTaskListList = assignmentDetail
-            this.setData({
-              list: list
-            })
-          }
-          console.log(list)
+        wx.hideLoading()
+        let list = {}
+        let assignmentDetail = []
+        if(res.data.jcdId!= null){
+          list.jcdId = res.data.jcdId
+          list.frameCode = res.data.frameCode
+          assignmentDetail = res.data.assignmentDetailForTaskListList.map(item => {
+            let itemDate = new Date(item.expectCompletionTime)
+            item.expectCompletionTime = util.formatTime(itemDate).substring(0, 10)
+            item.statusText = statusMap[item.status]
+            return item
+          })
+          list.assignmentDetailForTaskListList = assignmentDetail
+          this.setData({
+            list: list
+          })
+        }
+        console.log(list)
       },
       fail:err=>{
         console.log(err)
@@ -48,6 +61,9 @@ Page({
           icon:'none',
           title: '加载失败，请重试',
         })
+      },
+      complete:()=>{
+        callback && callback()
       }
     })
   }

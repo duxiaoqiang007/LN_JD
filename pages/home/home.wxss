@@ -34,3 +34,15 @@
   font-weight: bold;
   text-align: center;
 }
+.unsearchBtn{
+  margin-top: 40rpx;
+  margin-left: 225rpx;
+  width: 300rpx;
+  height: 100rpx;
+  background: #b08177;
+  font-size: 35rpx;
+  line-height: 100rpx;
+  opacity: 0.8;
+  font-weight: bold;
+  text-align: center; 
+}

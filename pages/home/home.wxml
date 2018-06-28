@@ -8,6 +8,5 @@
     </swiper-item>
   </block>
 </swiper>
-
-<input class='inputText' bindinput='onInput' maxlength='17' placeholder='请输入车架号'>{{frameCode}}</input>
-<view wx:if='{{frameCode.length>0}}' class='searchBtn' bindtap='onTapSearch'>查询</view>
+<input class='inputText' bindinput='onInput' maxlength='17' focus='true' placeholder='请输入车架号'></input>
+<view  class="{{frameCode.length>=4?'searchBtn':'unsearchBtn'}}" bindtap='onTapSearch'>查询</view>
